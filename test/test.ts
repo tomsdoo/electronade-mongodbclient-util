@@ -39,7 +39,7 @@ describe("MongoDbClient class", () => {
       await new MongoDbClient(uri, db, collection)
         .insertMany(items)
         .then(({ insertedCount }: { insertedCount: number }) => insertedCount),
-      2
+      items.length
     );
   });
 });
