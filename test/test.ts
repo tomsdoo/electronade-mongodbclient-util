@@ -32,9 +32,12 @@ describe("MongoDbClient class", () => {
   });
 
   it("insertMany()", async () => {
+    const items = [
+      { name: 0 }, { name: 1 }
+    ];
     assert.equal(
       await new MongoDbClient(uri, db, collection)
-        .insertMany([ { name: 1 }, { name: 2 } ])
+        .insertMany(items)
         .then(({ insertedCount }: { insertedCount: number }) => insertedCount),
       2
     );
