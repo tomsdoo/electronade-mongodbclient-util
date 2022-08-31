@@ -36,4 +36,13 @@ export class MongoDbClient {
       item
     });
   }
+  public remove(condition: any){
+    // @ts-ignore
+    return globalThis[this.exposedName].mongodbclient.remove({
+      uri: this.uri,
+      db: this.db,
+      collection: this.collection,
+      condition
+    });
+  }
 }
