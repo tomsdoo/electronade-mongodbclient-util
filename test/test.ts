@@ -37,7 +37,18 @@ describe("MongoDbClient class", () => {
           db:string;
           collection: string;
           condition?: any
-        }) => Promise.resolve([{ ...condition, _id: "x" }, { ...condition, _id: "y" }])
+        }) => Promise.resolve([{ ...condition, _id: "x" }, { ...condition, _id: "y" }]),
+        upsert: ({
+          uri,
+          db,
+          collection,
+          item
+        }: {
+          uri: string;
+          db: string;
+          collection: string;
+          item: object;
+        }) => Promise.resolve({ _id: "x", ...item })
       }
     };
   });
@@ -61,6 +72,16 @@ describe("MongoDbClient class", () => {
         .then((items: any[]) => items.every(
           item => item.name === "test"
         ))
+    );
+  });
+
+  it("upsert()", async () => {
+    const item = { name: "test", message: 1 };
+    assert.equal(
+      await new MongoDbClient(uri, db, collection)
+        .upsert(item)
+        .then(({ _id, ...rest }: { _id: string; }) => JSON.stringify(rest)),
+      JSON.stringify(item)
     );
   });
 });
