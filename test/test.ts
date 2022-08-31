@@ -26,7 +26,18 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           items: object[]
-        }) => Promise.resolve({ insertedCount: items.length })
+        }) => Promise.resolve({ insertedCount: items.length }),
+        read: ({
+          uri,
+          db,
+          collection,
+          condition
+        }: {
+          uri: string;
+          db:string;
+          collection: string;
+          condition?: any
+        }) => Promise.resolve([{ ...condition, _id: "x" }, { ...condition, _id: "y" }])
       }
     };
   });
@@ -40,6 +51,16 @@ describe("MongoDbClient class", () => {
         .insertMany(items)
         .then(({ insertedCount }: { insertedCount: number }) => insertedCount),
       items.length
+    );
+  });
+
+  it("read()", async () => {
+    assert(
+      await new MongoDbClient(uri, db, collection)
+        .read({ name: "test" })
+        .then((items: any[]) => items.every(
+          item => item.name === "test"
+        ))
     );
   });
 });
