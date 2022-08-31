@@ -27,4 +27,13 @@ export class MongoDbClient {
       condition
     });
   }
+  public upsert(item: object){
+    // @ts-ignore
+    return globalThis[this.exposedName].mongodbclient.upsert({
+      uri: this.uri,
+      db: this.db,
+      collection: this.collection,
+      item
+    });
+  }
 }
