@@ -18,4 +18,13 @@ export class MongoDbClient {
       items
     });
   }
+  public read(condition?: any){
+    // @ts-ignore
+    return globalThis[this.exposedName].mongodbclient.read({
+      uri: this.uri,
+      db: this.db,
+      collection: this.collection,
+      condition
+    });
+  }
 }
