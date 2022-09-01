@@ -39,7 +39,13 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           condition: any;
-        }) => Promise.resolve({ deletedCount: 1 })
+        }) => Promise.resolve({ deletedCount: 1 }),
+        count: ({ uri, db, collection, condition }: {
+          uri: string;
+          db: string;
+          collection: string;
+          condition?: any;
+        }) => Promise.resolve(1)
       }
     };
   });
@@ -81,6 +87,14 @@ describe("MongoDbClient class", () => {
       await new MongoDbClient(uri, db, collection)
         .remove({ _id: "test" })
         .then(({ deletedCount }: { deletedCount: number; }) => deletedCount),
+      1
+    );
+  });
+
+  it("count()", async () => {
+    assert.equal(
+      await new MongoDbClient(uri, db, collection)
+        .count(),
       1
     );
   });
