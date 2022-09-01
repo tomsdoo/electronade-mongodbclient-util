@@ -16,45 +16,25 @@ describe("MongoDbClient class", () => {
     // @ts-ignore
     globalThis.electronade = {
       mongodbclient: {
-        insertMany: ({
-          uri,
-          db,
-          collection,
-          items
-        }: {
+        insertMany: ({ uri, db, collection, items }: {
           uri: string;
           db: string;
           collection: string;
           items: object[]
         }) => Promise.resolve({ insertedCount: items.length }),
-        read: ({
-          uri,
-          db,
-          collection,
-          condition
-        }: {
+        read: ({ uri, db, collection, condition}: {
           uri: string;
           db:string;
           collection: string;
           condition?: any
         }) => Promise.resolve([{ ...condition, _id: "x" }, { ...condition, _id: "y" }]),
-        upsert: ({
-          uri,
-          db,
-          collection,
-          item
-        }: {
+        upsert: ({ uri, db, collection, item }: {
           uri: string;
           db: string;
           collection: string;
           item: object;
         }) => Promise.resolve({ _id: "x", ...item }),
-        remove: ({
-          uri,
-          db,
-          collection,
-          condition
-        }: {
+        remove: ({ uri, db, collection, condition }: {
           uri: string;
           db: string;
           collection: string;
