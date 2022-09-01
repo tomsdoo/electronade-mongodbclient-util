@@ -54,4 +54,14 @@ export class MongoDbClient {
       condition
     });
   }
+  public distinct(key: string, condition?: any){
+    // @ts-ignore
+    return globalThis[this.exposedName].mongodbclient.distinct({
+      uri: this.uri,
+      db: this.db,
+      collection: this.collection,
+      key,
+      condition
+    });
+  }
 }
