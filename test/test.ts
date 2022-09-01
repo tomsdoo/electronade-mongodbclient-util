@@ -45,7 +45,14 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           condition?: any;
-        }) => Promise.resolve(1)
+        }) => Promise.resolve(1),
+        distinct: ({ uri, db, collection, key, condition }: {
+          uri: string;
+          db: string;
+          collection: string;
+          key: string;
+          condition?: any;
+        }) => Promise.resolve(["test"])
       }
     };
   });
@@ -96,6 +103,15 @@ describe("MongoDbClient class", () => {
       await new MongoDbClient(uri, db, collection)
         .count(),
       1
+    );
+  });
+
+  it("distinct()", async () => {
+    assert.equal(
+      await new MongoDbClient(uri, db, collection)
+        .distinct("name")
+        .then((result: any) => JSON.stringify(result)),
+      JSON.stringify(["test"])
     );
   });
 });
