@@ -45,4 +45,13 @@ export class MongoDbClient {
       condition
     });
   }
+  public count(condition?: any){
+    // @ts-ignore
+    return globalThis[this.exposedName].mongodbclient.count({
+      uri: this.uri,
+      db: this.db,
+      collection: this.collection,
+      condition
+    });
+  }
 }
