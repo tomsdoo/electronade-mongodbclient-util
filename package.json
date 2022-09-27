@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/tomsdoo/electronade-mongodbclient-util#readme",
   "devDependencies": {
+    "@tomsd/md-book": "^0.17.0",
     "@types/mocha": "^9.1.1",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "eslint": "^8.24.0",
