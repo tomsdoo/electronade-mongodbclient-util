@@ -3,65 +3,70 @@ export class MongoDbClient {
   protected db: string;
   protected collection: string;
   protected exposedName: string;
-  constructor(uri: string, db: string, collection: string, exposedName?: string){
+  constructor(
+    uri: string,
+    db: string,
+    collection: string,
+    exposedName?: string
+  ) {
     this.uri = uri;
     this.db = db;
     this.collection = collection;
     this.exposedName = exposedName || "electronade";
   }
-  public insertMany(items: object[]){
+  public insertMany(items: object[]) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.insertMany({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
-      items
+      items,
     });
   }
-  public read(condition?: any){
+  public read(condition?: any) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.read({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
-      condition
+      condition,
     });
   }
-  public upsert(item: object){
+  public upsert(item: object) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.upsert({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
-      item
+      item,
     });
   }
-  public remove(condition: any){
+  public remove(condition: any) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.remove({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
-      condition
+      condition,
     });
   }
-  public count(condition?: any){
+  public count(condition?: any) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.count({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
-      condition
+      condition,
     });
   }
-  public distinct(key: string, condition?: any){
+  public distinct(key: string, condition?: any) {
     // @ts-ignore
     return globalThis[this.exposedName].mongodbclient.distinct({
       uri: this.uri,
       db: this.db,
       collection: this.collection,
       key,
-      condition
+      condition,
     });
   }
 }

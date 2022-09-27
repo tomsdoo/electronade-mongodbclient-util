@@ -16,51 +16,84 @@ describe("MongoDbClient class", () => {
     // @ts-ignore
     globalThis.electronade = {
       mongodbclient: {
-        insertMany: ({ uri, db, collection, items }: {
+        insertMany: ({
+          uri,
+          db,
+          collection,
+          items,
+        }: {
           uri: string;
           db: string;
           collection: string;
-          items: object[]
+          items: object[];
         }) => Promise.resolve({ insertedCount: items.length }),
-        read: ({ uri, db, collection, condition}: {
+        read: ({
+          uri,
+          db,
+          collection,
+          condition,
+        }: {
           uri: string;
-          db:string;
+          db: string;
           collection: string;
-          condition?: any
-        }) => Promise.resolve([{ ...condition, _id: "x" }, { ...condition, _id: "y" }]),
-        upsert: ({ uri, db, collection, item }: {
+          condition?: any;
+        }) =>
+          Promise.resolve([
+            { ...condition, _id: "x" },
+            { ...condition, _id: "y" },
+          ]),
+        upsert: ({
+          uri,
+          db,
+          collection,
+          item,
+        }: {
           uri: string;
           db: string;
           collection: string;
           item: object;
         }) => Promise.resolve({ _id: "x", ...item }),
-        remove: ({ uri, db, collection, condition }: {
+        remove: ({
+          uri,
+          db,
+          collection,
+          condition,
+        }: {
           uri: string;
           db: string;
           collection: string;
           condition: any;
         }) => Promise.resolve({ deletedCount: 1 }),
-        count: ({ uri, db, collection, condition }: {
+        count: ({
+          uri,
+          db,
+          collection,
+          condition,
+        }: {
           uri: string;
           db: string;
           collection: string;
           condition?: any;
         }) => Promise.resolve(1),
-        distinct: ({ uri, db, collection, key, condition }: {
+        distinct: ({
+          uri,
+          db,
+          collection,
+          key,
+          condition,
+        }: {
           uri: string;
           db: string;
           collection: string;
           key: string;
           condition?: any;
-        }) => Promise.resolve(["test"])
-      }
+        }) => Promise.resolve(["test"]),
+      },
     };
   });
 
   it("insertMany()", async () => {
-    const items = [
-      { name: 0 }, { name: 1 }
-    ];
+    const items = [{ name: 0 }, { name: 1 }];
     assert.equal(
       await new MongoDbClient(uri, db, collection)
         .insertMany(items)
@@ -73,9 +106,7 @@ describe("MongoDbClient class", () => {
     assert(
       await new MongoDbClient(uri, db, collection)
         .read({ name: "test" })
-        .then((items: any[]) => items.every(
-          item => item.name === "test"
-        ))
+        .then((items: any[]) => items.every((item) => item.name === "test"))
     );
   });
 
@@ -84,7 +115,7 @@ describe("MongoDbClient class", () => {
     assert.equal(
       await new MongoDbClient(uri, db, collection)
         .upsert(item)
-        .then(({ _id, ...rest }: { _id: string; }) => JSON.stringify(rest)),
+        .then(({ _id, ...rest }: { _id: string }) => JSON.stringify(rest)),
       JSON.stringify(item)
     );
   });
@@ -93,17 +124,13 @@ describe("MongoDbClient class", () => {
     assert.equal(
       await new MongoDbClient(uri, db, collection)
         .remove({ _id: "test" })
-        .then(({ deletedCount }: { deletedCount: number; }) => deletedCount),
+        .then(({ deletedCount }: { deletedCount: number }) => deletedCount),
       1
     );
   });
 
   it("count()", async () => {
-    assert.equal(
-      await new MongoDbClient(uri, db, collection)
-        .count(),
-      1
-    );
+    assert.equal(await new MongoDbClient(uri, db, collection).count(), 1);
   });
 
   it("distinct()", async () => {
