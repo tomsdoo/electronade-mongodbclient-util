@@ -13,10 +13,10 @@ describe("MongoDbClient class", () => {
     db = "db";
     collection = "collection";
 
-    // @ts-ignore
+    // @ts-expect-error
     globalThis.electronade = {
       mongodbclient: {
-        insertMany: ({
+        insertMany: async ({
           uri,
           db,
           collection,
@@ -26,8 +26,8 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           items: object[];
-        }) => Promise.resolve({ insertedCount: items.length }),
-        read: ({
+        }) => await Promise.resolve({ insertedCount: items.length }),
+        read: async ({
           uri,
           db,
           collection,
@@ -38,11 +38,11 @@ describe("MongoDbClient class", () => {
           collection: string;
           condition?: any;
         }) =>
-          Promise.resolve([
+          await Promise.resolve([
             { ...condition, _id: "x" },
             { ...condition, _id: "y" },
           ]),
-        upsert: ({
+        upsert: async ({
           uri,
           db,
           collection,
@@ -52,8 +52,8 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           item: object;
-        }) => Promise.resolve({ _id: "x", ...item }),
-        remove: ({
+        }) => await Promise.resolve({ _id: "x", ...item }),
+        remove: async ({
           uri,
           db,
           collection,
@@ -63,8 +63,8 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           condition: any;
-        }) => Promise.resolve({ deletedCount: 1 }),
-        count: ({
+        }) => await Promise.resolve({ deletedCount: 1 }),
+        count: async ({
           uri,
           db,
           collection,
@@ -74,8 +74,8 @@ describe("MongoDbClient class", () => {
           db: string;
           collection: string;
           condition?: any;
-        }) => Promise.resolve(1),
-        distinct: ({
+        }) => await Promise.resolve(1),
+        distinct: async ({
           uri,
           db,
           collection,
@@ -87,7 +87,7 @@ describe("MongoDbClient class", () => {
           collection: string;
           key: string;
           condition?: any;
-        }) => Promise.resolve(["test"]),
+        }) => await Promise.resolve(["test"]),
       },
     };
   });
