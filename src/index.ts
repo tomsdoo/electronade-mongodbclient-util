@@ -12,10 +12,11 @@ export class MongoDbClient {
     this.uri = uri;
     this.db = db;
     this.collection = collection;
-    this.exposedName = exposedName || "electronade";
+    this.exposedName = exposedName ?? "electronade";
   }
-  public insertMany(items: object[]) {
-    // @ts-ignore
+
+  public async insertMany(items: object[]): Promise<any> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.insertMany({
       uri: this.uri,
       db: this.db,
@@ -23,8 +24,9 @@ export class MongoDbClient {
       items,
     });
   }
-  public read(condition?: any) {
-    // @ts-ignore
+
+  public async read(condition?: any): Promise<any[]> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.read({
       uri: this.uri,
       db: this.db,
@@ -32,8 +34,9 @@ export class MongoDbClient {
       condition,
     });
   }
-  public upsert(item: object) {
-    // @ts-ignore
+
+  public async upsert(item: object): Promise<any> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.upsert({
       uri: this.uri,
       db: this.db,
@@ -41,8 +44,9 @@ export class MongoDbClient {
       item,
     });
   }
-  public remove(condition: any) {
-    // @ts-ignore
+
+  public async remove(condition: any): Promise<any> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.remove({
       uri: this.uri,
       db: this.db,
@@ -50,8 +54,9 @@ export class MongoDbClient {
       condition,
     });
   }
-  public count(condition?: any) {
-    // @ts-ignore
+
+  public async count(condition?: any): Promise<number> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.count({
       uri: this.uri,
       db: this.db,
@@ -59,8 +64,9 @@ export class MongoDbClient {
       condition,
     });
   }
-  public distinct(key: string, condition?: any) {
-    // @ts-ignore
+
+  public async distinct(key: string, condition?: any): Promise<any[]> {
+    // @ts-expect-error
     return globalThis[this.exposedName].mongodbclient.distinct({
       uri: this.uri,
       db: this.db,
