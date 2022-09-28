@@ -4,6 +4,8 @@ It's a package that provides some utilities for `electronade-mongodbclient`.
 
 It's an optional module for `electronade-mongodbclient` so `electronade-mongodbclient` should be installed before using `electronade-mongodbclient-util`.
 
+See [electronade-mongodbclient-util.netlify.app](https://electronade-mongodbclient-util.netlify.app/) for details.
+
 ## Installation
 ``` shell
 npm install electronade-mongodbclient-util
