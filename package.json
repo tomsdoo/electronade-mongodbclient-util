@@ -34,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/tomsdoo/electronade-mongodbclient-util.git"
   },
-  "keywords": [],
+  "keywords": ["electronade"],
   "author": "tom",
   "license": "MIT",
   "bugs": {
