@@ -6,6 +6,12 @@ It's an optional module for `electronade-mongodbclient` so `electronade-mongodbc
 
 See [electronade-mongodbclient-util.netlify.app](https://electronade-mongodbclient-util.netlify.app/) for details.
 
+![npm](https://img.shields.io/npm/v/electronade-mongodbclient-util)
+![NPM](https://img.shields.io/npm/l/electronade-mongodbclient-util)
+![npms.io (quality)](https://img.shields.io/npms-io/quality-score/electronade-mongodbclient-util)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/electronade-mongodbclient-util)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
+
 ## Installation
 ``` shell
 npm install electronade-mongodbclient-util
